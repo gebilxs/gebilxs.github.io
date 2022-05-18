@@ -1,0 +1,205 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Gebilxs | Gebilxs</title><meta name="author" content="gebilxs"><meta name="copyright" content="gebilxs"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1.语言进阶并发VS并行 1.1 Goroutine 快速打印hello goroutine 1.2 CSP 1.3 Channel  发送到src 这个channel 通过src实现两个协程4之间的通信  从结果上面看最后可以达到并发安全的结果    1.4  并发安全Lock 1.5 WaitGroup 对之前的并发hello world进行一个基于WaitGroup的优化 wg.Add（5）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gebilxs">
+<meta property="og:url" content="https://gebilxs.github.io/2022/05/08/bytedance/byte-dance-lesson2/index.html">
+<meta property="og:site_name" content="Gebilxs">
+<meta property="og:description" content="1.语言进阶并发VS并行 1.1 Goroutine 快速打印hello goroutine 1.2 CSP 1.3 Channel  发送到src 这个channel 通过src实现两个协程4之间的通信  从结果上面看最后可以达到并发安全的结果    1.4  并发安全Lock 1.5 WaitGroup 对之前的并发hello world进行一个基于WaitGroup的优化 wg.Add（5）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gebilxs.github.io/img/1648824822294.jpg">
+<meta property="article:published_time" content="2022-05-08T05:37:03.715Z">
+<meta property="article:modified_time" content="2022-05-08T08:41:49.535Z">
+<meta property="article:author" content="gebilxs">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gebilxs.github.io/img/1648824822294.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://gebilxs.github.io/2022/05/08/bytedance/byte-dance-lesson2/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Gebilxs',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-05-08 16:41:49'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.1.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Gebilxs" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/./img/photo-1650020660958-7826faba0824.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 连接</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/./img/1648824822294.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Gebilxs</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 连接</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">无题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-08T05:37:03.715Z" title="发表于 2022-05-08 13:37:03">2022-05-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-05-08T08:41:49.535Z" title="更新于 2022-05-08 16:41:49">2022-05-08</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="1-语言进阶"><a href="#1-语言进阶" class="headerlink" title="1.语言进阶"></a>1.语言进阶</h2><h3 id="并发VS并行"><a href="#并发VS并行" class="headerlink" title="并发VS并行"></a>并发VS并行</h3><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508150651849.png" alt="image-20220508150651849"></p>
+<h4 id="1-1-Goroutine"><a href="#1-1-Goroutine" class="headerlink" title="1.1 Goroutine"></a>1.1 Goroutine</h4><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508150816714.png" alt="image-20220508150816714"></p>
+<h5 id="快速打印hello-goroutine"><a href="#快速打印hello-goroutine" class="headerlink" title="快速打印hello goroutine"></a>快速打印hello goroutine</h5><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508152459793.png" alt="image-20220508152459793"></p>
+<h3 id="1-2-CSP"><a href="#1-2-CSP" class="headerlink" title="1.2 CSP"></a>1.2 CSP</h3><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508152734101.png" alt="image-20220508152734101"></p>
+<h3 id="1-3-Channel"><a href="#1-3-Channel" class="headerlink" title="1.3 Channel"></a>1.3 Channel</h3><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508152805350.png" alt="image-20220508152805350"></p>
+<p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508153101049.png" alt="image-20220508153101049"></p>
+<pre class="line-numbers language-none"><code class="language-none">发送到src 这个channel 通过src实现两个协程4之间的通信 
+从结果上面看最后可以达到并发安全的结果<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+
+<h4 id="1-4-并发安全Lock"><a href="#1-4-并发安全Lock" class="headerlink" title="1.4  并发安全Lock"></a>1.4  并发安全Lock</h4><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508153437362.png" alt="image-20220508153437362"></p>
+<h4 id="1-5-WaitGroup"><a href="#1-5-WaitGroup" class="headerlink" title="1.5 WaitGroup"></a>1.5 WaitGroup</h4><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508153739265.png" alt="image-20220508153739265"></p>
+<h5 id="对之前的并发hello-world进行一个基于WaitGroup的优化"><a href="#对之前的并发hello-world进行一个基于WaitGroup的优化" class="headerlink" title="对之前的并发hello world进行一个基于WaitGroup的优化"></a>对之前的并发hello world进行一个基于WaitGroup的优化</h5><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508153927631.png" alt="image-20220508153927631"></p>
+<pre class="line-numbers language-none"><code class="language-none">wg.Add（5）：增加5个携程
+wg.Done() ：计数器-1
+wg.Wait() ：进行阻塞<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h2 id="2-依赖管理"><a href="#2-依赖管理" class="headerlink" title="2.依赖管理"></a>2.依赖管理</h2><pre class="line-numbers language-none"><code class="language-none">工程项目不可能基于标准库0-1编码搭建
+需要管理依赖库
+GO的依赖管理 GOPATH-&gt;GO Vendor-&gt;GO MOUDLE<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="2-1-GOPATH"><a href="#2-1-GOPATH" class="headerlink" title="2.1 GOPATH"></a>2.1 GOPATH</h4><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508154350638.png" alt="image-20220508154350638"></p>
+<h5 id="2-1-1-GOPATH-弊端"><a href="#2-1-1-GOPATH-弊端" class="headerlink" title="2.1.1 GOPATH-弊端"></a>2.1.1 GOPATH-弊端</h5><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508154438588.png" alt="image-20220508154438588"></p>
+<h5 id="2-1-2-Go-Vendor"><a href="#2-1-2-Go-Vendor" class="headerlink" title="2.1.2 Go Vendor"></a>2.1.2 Go Vendor</h5><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508154526256.png" alt="image-20220508154526256"></p>
+<h5 id="2-1-2-弊端"><a href="#2-1-2-弊端" class="headerlink" title="2.1.2 弊端"></a>2.1.2 弊端</h5><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508154616036.png" alt="image-20220508154616036"></p>
+<h5 id="2-1-3-GO-MODULE"><a href="#2-1-3-GO-MODULE" class="headerlink" title="2.1.3 GO MODULE"></a>2.1.3 GO MODULE</h5><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508154647955.png" alt="image-20220508154647955"></p>
+<h4 id="2-2-依赖管理三要素"><a href="#2-2-依赖管理三要素" class="headerlink" title="2.2 依赖管理三要素"></a>2.2 依赖管理三要素</h4><pre class="line-numbers language-none"><code class="language-none">1.配置文件，描述依赖  --go.mod
+2.中心仓库管理依赖库  --Proxy
+3.本地工具          --go get/mod<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h4 id="2-3-依赖配置"><a href="#2-3-依赖配置" class="headerlink" title="2.3 依赖配置"></a>2.3 依赖配置</h4><h5 id="2-3-1-go-mod"><a href="#2-3-1-go-mod" class="headerlink" title="2.3.1 go.mod"></a>2.3.1 go.mod</h5><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508154917466.png" alt="image-20220508154917466"></p>
+<h5 id="2-3-2-依赖配置-version"><a href="#2-3-2-依赖配置-version" class="headerlink" title="2.3.2 依赖配置-version"></a>2.3.2 依赖配置-version</h5><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508155030664.png" alt="image-20220508155030664"></p>
+<h5 id="2-3-3-依赖配置-indirect"><a href="#2-3-3-依赖配置-indirect" class="headerlink" title="2.3.3 依赖配置-indirect"></a>2.3.3 依赖配置-indirect</h5><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508155202315.png" alt="image-20220508155202315"></p>
+<h5 id="2-3-4-依赖管理-incompatible"><a href="#2-3-4-依赖管理-incompatible" class="headerlink" title="2.3.4 依赖管理 -incompatible"></a>2.3.4 依赖管理 -incompatible</h5><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508155305797.png" alt="image-20220508155305797"></p>
+<h5 id="2-3-5-依赖配置-依赖图"><a href="#2-3-5-依赖配置-依赖图" class="headerlink" title="2.3.5 依赖配置-依赖图"></a>2.3.5 依赖配置-依赖图</h5><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508155424625.png" alt="image-20220508155424625"></p>
+<h5 id="2-3-6-依赖分发-回源"><a href="#2-3-6-依赖分发-回源" class="headerlink" title="2.3.6 依赖分发-回源"></a>2.3.6 依赖分发-回源</h5><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508155511546.png" alt="image-20220508155511546"></p>
+<h5 id="2-3-7-proxy"><a href="#2-3-7-proxy" class="headerlink" title="2.3.7 proxy"></a>2.3.7 proxy</h5><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508155603315.png" alt="image-20220508155603315"></p>
+<h5 id="2-3-8-GOproxy"><a href="#2-3-8-GOproxy" class="headerlink" title="2.3.8 GOproxy"></a>2.3.8 GOproxy</h5><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508155645037.png" alt="image-20220508155645037"></p>
+<h5 id="2-3-9-go-get"><a href="#2-3-9-go-get" class="headerlink" title="2.3.9 go get"></a>2.3.9 go get</h5><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508155740816.png" alt="image-20220508155740816"></p>
+<h5 id="2-3-10-go-mod"><a href="#2-3-10-go-mod" class="headerlink" title="2.3.10 go mod"></a>2.3.10 go mod</h5><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508155821500.png" alt="image-20220508155821500"></p>
+<h2 id="3-测试"><a href="#3-测试" class="headerlink" title="3.测试"></a>3.测试</h2><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508160218008.png" alt="image-20220508160218008"></p>
+<h4 id="3-1-单元测试"><a href="#3-1-单元测试" class="headerlink" title="3.1 单元测试"></a>3.1 单元测试</h4><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508160301536.png" alt="image-20220508160301536"></p>
+<h5 id="3-1-1-单元测试-规则"><a href="#3-1-1-单元测试-规则" class="headerlink" title="3.1.1 单元测试-规则"></a>3.1.1 单元测试-规则</h5><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508160439431.png" alt="image-20220508160439431"></p>
+<h5 id="3-1-2-单元测试-例子"><a href="#3-1-2-单元测试-例子" class="headerlink" title="3.1.2 单元测试-例子"></a>3.1.2 单元测试-例子</h5><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508160608511.png" alt="image-20220508160608511"></p>
+<h5 id="3-1-3-单元测试-运行"><a href="#3-1-3-单元测试-运行" class="headerlink" title="3.1.3 单元测试-运行"></a>3.1.3 单元测试-运行</h5><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508160649663.png" alt="image-20220508160649663"></p>
+<h5 id="3-1-4-单元测试-assert"><a href="#3-1-4-单元测试-assert" class="headerlink" title="3.1.4 单元测试-assert"></a>3.1.4 单元测试-assert</h5><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508160729562.png" alt="image-20220508160729562"></p>
+<h5 id="3-1-5-单元测试-覆盖率"><a href="#3-1-5-单元测试-覆盖率" class="headerlink" title="3.1.5 单元测试-覆盖率"></a>3.1.5 单元测试-覆盖率</h5><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508160756925.png" alt="image-20220508160756925"></p>
+<p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508161000228.png" alt="image-20220508161000228"></p>
+<h4 id="3-2-单元测试-依赖"><a href="#3-2-单元测试-依赖" class="headerlink" title="3.2 单元测试-依赖"></a>3.2 单元测试-依赖</h4><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508161200626.png" alt="image-20220508161200626"></p>
+<h4 id="3-3-单元测试-文件处理"><a href="#3-3-单元测试-文件处理" class="headerlink" title="3.3 单元测试-文件处理"></a>3.3 单元测试-文件处理</h4><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508161315220.png" alt="image-20220508161315220"></p>
+<h4 id="3-4-单元测试-Mock"><a href="#3-4-单元测试-Mock" class="headerlink" title="3.4 单元测试-Mock"></a>3.4 单元测试-Mock</h4><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508161410779.png" alt="image-20220508161410779"></p>
+<p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508161502742.png" alt="image-20220508161502742"></p>
+<pre class="line-numbers language-none"><code class="language-none">完全不依赖本地的环境<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<h4 id="3-5-基准测试"><a href="#3-5-基准测试" class="headerlink" title="3.5 基准测试"></a>3.5 基准测试</h4><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508161540166.png" alt="image-20220508161540166"></p>
+<p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508161559467.png" alt="image-20220508161559467"></p>
+<h5 id="3-5-2-测试"><a href="#3-5-2-测试" class="headerlink" title="3.5.2-测试"></a>3.5.2-测试</h5><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508161627804.png" alt="image-20220508161627804"></p>
+<pre class="line-numbers language-none"><code class="language-none">做串行的压力测试
+全局锁-&gt;降低并行性能<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+
+<h5 id="3-5-3-优化"><a href="#3-5-3-优化" class="headerlink" title="3.5.3 -优化"></a>3.5.3 -优化</h5><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508161742244.png" alt="image-20220508161742244"></p>
+<h2 id="4-项目实战"><a href="#4-项目实战" class="headerlink" title="4.项目实战"></a>4.项目实战</h2><h4 id="4-1-需求背景"><a href="#4-1-需求背景" class="headerlink" title="4.1 需求背景"></a>4.1 需求背景</h4><h4 id="4-2-需求用例"><a href="#4-2-需求用例" class="headerlink" title="4.2 需求用例"></a>4.2 需求用例</h4><h4 id="4-3-E-R-图"><a href="#4-3-E-R-图" class="headerlink" title="4.3 E-R 图"></a>4.3 E-R 图</h4><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508163154571.png" alt="image-20220508163154571"></p>
+<h4 id="4-4-分层结构"><a href="#4-4-分层结构" class="headerlink" title="4.4 分层结构"></a>4.4 分层结构</h4><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508163250624.png" alt="image-20220508163250624"></p>
+<h4 id="4-5-组件"><a href="#4-5-组件" class="headerlink" title="4.5 组件"></a>4.5 组件</h4><h4 id="4-6-Respository"><a href="#4-6-Respository" class="headerlink" title="4.6 Respository"></a>4.6 Respository</h4><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508163608679.png" alt="image-20220508163608679"></p>
+<h5 id="4-6-1-Repository-index"><a href="#4-6-1-Repository-index" class="headerlink" title="4.6.1 Repository-index"></a>4.6.1 Repository-index</h5><p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508163740539.png" alt="image-20220508163740539"></p>
+<p><img src="/2022/05/08/bytedance/byte-dance-lesson2/image-20220508164026472.png" alt="image-20220508164026472"></p>
+<h4 id="4-7-service"><a href="#4-7-service" class="headerlink" title="4.7 service"></a>4.7 service</h4><h4 id="4-8-controller"><a href="#4-8-controller" class="headerlink" title="4.8 controller"></a>4.8 controller</h4><h4 id="4-9-router"><a href="#4-9-router" class="headerlink" title="4.9 router"></a>4.9 router</h4><h4 id="4-10-run"><a href="#4-10-run" class="headerlink" title="4.10 run"></a>4.10 run</h4></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">gebilxs</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://gebilxs.github.io/2022/05/08/bytedance/byte-dance-lesson2/">https://gebilxs.github.io/2022/05/08/bytedance/byte-dance-lesson2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://gebilxs.github.io" target="_blank">Gebilxs</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/./img/1648824822294.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/"><img class="prev-cover" src="/./img/1648824822294.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">计算机网络 -- 概论</div></div></a></div><div class="next-post pull-right"><a href="/2022/04/26/leetcode-go/"><img class="next-cover" src="/./img/1648824822294.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info"></div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/./img/photo-1650020660958-7826faba0824.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">gebilxs</div><div class="author-info__description"></div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/gebilxs"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/gebilxs" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">4.18前更新--"go blog API介绍" && "Docker & protainer 部署"</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6"><span class="toc-number">1.</span> <span class="toc-text">1.语言进阶</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91VS%E5%B9%B6%E8%A1%8C"><span class="toc-number">1.1.</span> <span class="toc-text">并发VS并行</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-Goroutine"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1 Goroutine</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E6%89%93%E5%8D%B0hello-goroutine"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">快速打印hello goroutine</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-CSP"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 CSP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-Channel"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 Channel</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-%E5%B9%B6%E5%8F%91%E5%AE%89%E5%85%A8Lock"><span class="toc-number">1.3.1.</span> <span class="toc-text">1.4  并发安全Lock</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-WaitGroup"><span class="toc-number">1.3.2.</span> <span class="toc-text">1.5 WaitGroup</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AF%B9%E4%B9%8B%E5%89%8D%E7%9A%84%E5%B9%B6%E5%8F%91hello-world%E8%BF%9B%E8%A1%8C%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8EWaitGroup%E7%9A%84%E4%BC%98%E5%8C%96"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">对之前的并发hello world进行一个基于WaitGroup的优化</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">2.依赖管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-GOPATH"><span class="toc-number">2.0.1.</span> <span class="toc-text">2.1 GOPATH</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-1-GOPATH-%E5%BC%8A%E7%AB%AF"><span class="toc-number">2.0.1.1.</span> <span class="toc-text">2.1.1 GOPATH-弊端</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-2-Go-Vendor"><span class="toc-number">2.0.1.2.</span> <span class="toc-text">2.1.2 Go Vendor</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-2-%E5%BC%8A%E7%AB%AF"><span class="toc-number">2.0.1.3.</span> <span class="toc-text">2.1.2 弊端</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-3-GO-MODULE"><span class="toc-number">2.0.1.4.</span> <span class="toc-text">2.1.3 GO MODULE</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E4%B8%89%E8%A6%81%E7%B4%A0"><span class="toc-number">2.0.2.</span> <span class="toc-text">2.2 依赖管理三要素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-%E4%BE%9D%E8%B5%96%E9%85%8D%E7%BD%AE"><span class="toc-number">2.0.3.</span> <span class="toc-text">2.3 依赖配置</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-1-go-mod"><span class="toc-number">2.0.3.1.</span> <span class="toc-text">2.3.1 go.mod</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-2-%E4%BE%9D%E8%B5%96%E9%85%8D%E7%BD%AE-version"><span class="toc-number">2.0.3.2.</span> <span class="toc-text">2.3.2 依赖配置-version</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-3-%E4%BE%9D%E8%B5%96%E9%85%8D%E7%BD%AE-indirect"><span class="toc-number">2.0.3.3.</span> <span class="toc-text">2.3.3 依赖配置-indirect</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-4-%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86-incompatible"><span class="toc-number">2.0.3.4.</span> <span class="toc-text">2.3.4 依赖管理 -incompatible</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-5-%E4%BE%9D%E8%B5%96%E9%85%8D%E7%BD%AE-%E4%BE%9D%E8%B5%96%E5%9B%BE"><span class="toc-number">2.0.3.5.</span> <span class="toc-text">2.3.5 依赖配置-依赖图</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-6-%E4%BE%9D%E8%B5%96%E5%88%86%E5%8F%91-%E5%9B%9E%E6%BA%90"><span class="toc-number">2.0.3.6.</span> <span class="toc-text">2.3.6 依赖分发-回源</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-7-proxy"><span class="toc-number">2.0.3.7.</span> <span class="toc-text">2.3.7 proxy</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-8-GOproxy"><span class="toc-number">2.0.3.8.</span> <span class="toc-text">2.3.8 GOproxy</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-9-go-get"><span class="toc-number">2.0.3.9.</span> <span class="toc-text">2.3.9 go get</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-10-go-mod"><span class="toc-number">2.0.3.10.</span> <span class="toc-text">2.3.10 go mod</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%B5%8B%E8%AF%95"><span class="toc-number">3.</span> <span class="toc-text">3.测试</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95"><span class="toc-number">3.0.1.</span> <span class="toc-text">3.1 单元测试</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-1-%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-%E8%A7%84%E5%88%99"><span class="toc-number">3.0.1.1.</span> <span class="toc-text">3.1.1 单元测试-规则</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-2-%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-%E4%BE%8B%E5%AD%90"><span class="toc-number">3.0.1.2.</span> <span class="toc-text">3.1.2 单元测试-例子</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-3-%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-%E8%BF%90%E8%A1%8C"><span class="toc-number">3.0.1.3.</span> <span class="toc-text">3.1.3 单元测试-运行</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-4-%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-assert"><span class="toc-number">3.0.1.4.</span> <span class="toc-text">3.1.4 单元测试-assert</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-5-%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-%E8%A6%86%E7%9B%96%E7%8E%87"><span class="toc-number">3.0.1.5.</span> <span class="toc-text">3.1.5 单元测试-覆盖率</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-%E4%BE%9D%E8%B5%96"><span class="toc-number">3.0.2.</span> <span class="toc-text">3.2 单元测试-依赖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86"><span class="toc-number">3.0.3.</span> <span class="toc-text">3.3 单元测试-文件处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-Mock"><span class="toc-number">3.0.4.</span> <span class="toc-text">3.4 单元测试-Mock</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5-%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95"><span class="toc-number">3.0.5.</span> <span class="toc-text">3.5 基准测试</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-5-2-%E6%B5%8B%E8%AF%95"><span class="toc-number">3.0.5.1.</span> <span class="toc-text">3.5.2-测试</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-5-3-%E4%BC%98%E5%8C%96"><span class="toc-number">3.0.5.2.</span> <span class="toc-text">3.5.3 -优化</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98"><span class="toc-number">4.</span> <span class="toc-text">4.项目实战</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-%E9%9C%80%E6%B1%82%E8%83%8C%E6%99%AF"><span class="toc-number">4.0.1.</span> <span class="toc-text">4.1 需求背景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-%E9%9C%80%E6%B1%82%E7%94%A8%E4%BE%8B"><span class="toc-number">4.0.2.</span> <span class="toc-text">4.2 需求用例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-E-R-%E5%9B%BE"><span class="toc-number">4.0.3.</span> <span class="toc-text">4.3 E-R 图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-4-%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84"><span class="toc-number">4.0.4.</span> <span class="toc-text">4.4 分层结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-5-%E7%BB%84%E4%BB%B6"><span class="toc-number">4.0.5.</span> <span class="toc-text">4.5 组件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-6-Respository"><span class="toc-number">4.0.6.</span> <span class="toc-text">4.6 Respository</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#4-6-1-Repository-index"><span class="toc-number">4.0.6.1.</span> <span class="toc-text">4.6.1 Repository-index</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-7-service"><span class="toc-number">4.0.7.</span> <span class="toc-text">4.7 service</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-8-controller"><span class="toc-number">4.0.8.</span> <span class="toc-text">4.8 controller</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-9-router"><span class="toc-number">4.0.9.</span> <span class="toc-text">4.9 router</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-10-run"><span class="toc-number">4.0.10.</span> <span class="toc-text">4.10 run</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/05/18/ji-suan-ji-wang-luo/5-wang-luo-ceng-kong-zhi-ping-mian/" title="无题"><img src="/./img/1648824822294.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2022/05/18/ji-suan-ji-wang-luo/5-wang-luo-ceng-kong-zhi-ping-mian/" title="无题">无题</a><time datetime="2022-05-18T10:50:00.762Z" title="发表于 2022-05-18 18:50:00">2022-05-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/18/ji-suan-ji-wang-luo/4-wang-luo-ceng/" title="无题"><img src="/./img/1648824822294.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2022/05/18/ji-suan-ji-wang-luo/4-wang-luo-ceng/" title="无题">无题</a><time datetime="2022-05-18T07:20:14.929Z" title="发表于 2022-05-18 15:20:14">2022-05-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/15/ji-suan-ji-wang-luo/3-chuan-shu-ceng/" title="计算机网络 -- 概论"><img src="/./img/1648824822294.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="计算机网络 -- 概论"/></a><div class="content"><a class="title" href="/2022/05/15/ji-suan-ji-wang-luo/3-chuan-shu-ceng/" title="计算机网络 -- 概论">计算机网络 -- 概论</a><time datetime="2022-05-14T16:00:00.000Z" title="发表于 2022-05-15 00:00:00">2022-05-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/14/lesson-2/" title="无题"><img src="/./img/1648824822294.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2022/05/14/lesson-2/" title="无题">无题</a><time datetime="2022-05-14T14:12:07.372Z" title="发表于 2022-05-14 22:12:07">2022-05-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/14/ji-suan-ji-wang-luo/2-ying-yong-ceng/" title="计算机网络 -- 概论"><img src="/./img/1648824822294.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="计算机网络 -- 概论"/></a><div class="content"><a class="title" href="/2022/05/14/ji-suan-ji-wang-luo/2-ying-yong-ceng/" title="计算机网络 -- 概论">计算机网络 -- 概论</a><time datetime="2022-05-13T16:00:00.000Z" title="发表于 2022-05-14 00:00:00">2022-05-14</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent"><div id="footer-wrap"><div class="copyright">&copy;2022 By gebilxs</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

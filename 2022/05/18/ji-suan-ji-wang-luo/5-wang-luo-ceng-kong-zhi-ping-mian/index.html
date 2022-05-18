@@ -1,0 +1,141 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Gebilxs | Gebilxs</title><meta name="author" content="gebilxs"><meta name="copyright" content="gebilxs"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="网络层控制平面路由选择算法以子网为单位进行计算  路由协议 路由概念 最优化原则 dijk Bellman-Ford 自治系统内部的路由选择RIP OSPF  ISP 之间的路由选择：BGP层次路由">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gebilxs">
+<meta property="og:url" content="https://gebilxs.github.io/2022/05/18/ji-suan-ji-wang-luo/5-wang-luo-ceng-kong-zhi-ping-mian/index.html">
+<meta property="og:site_name" content="Gebilxs">
+<meta property="og:description" content="网络层控制平面路由选择算法以子网为单位进行计算  路由协议 路由概念 最优化原则 dijk Bellman-Ford 自治系统内部的路由选择RIP OSPF  ISP 之间的路由选择：BGP层次路由">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gebilxs.github.io/img/1648824822294.jpg">
+<meta property="article:published_time" content="2022-05-18T10:50:00.762Z">
+<meta property="article:modified_time" content="2022-05-18T14:43:44.125Z">
+<meta property="article:author" content="gebilxs">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gebilxs.github.io/img/1648824822294.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://gebilxs.github.io/2022/05/18/ji-suan-ji-wang-luo/5-wang-luo-ceng-kong-zhi-ping-mian/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Gebilxs',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-05-18 22:43:44'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.1.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Gebilxs" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/./img/photo-1650020660958-7826faba0824.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 连接</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/./img/1648824822294.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Gebilxs</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 连接</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">无题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-18T10:50:00.762Z" title="发表于 2022-05-18 18:50:00">2022-05-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-05-18T14:43:44.125Z" title="更新于 2022-05-18 22:43:44">2022-05-18</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="网络层控制平面"><a href="#网络层控制平面" class="headerlink" title="网络层控制平面"></a>网络层控制平面</h2><h3 id="路由选择算法"><a href="#路由选择算法" class="headerlink" title="路由选择算法"></a>路由选择算法</h3><pre class="line-numbers language-none"><code class="language-none">以子网为单位进行计算<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="路由协议"><a href="#路由协议" class="headerlink" title="路由协议"></a>路由协议</h4><p><img src="/2022/05/18/ji-suan-ji-wang-luo/5-wang-luo-ceng-kong-zhi-ping-mian/image-20220518185337501.png" alt="image-20220518185337501"></p>
+<h4 id="路由概念"><a href="#路由概念" class="headerlink" title="路由概念"></a>路由概念</h4><p><img src="/2022/05/18/ji-suan-ji-wang-luo/5-wang-luo-ceng-kong-zhi-ping-mian/image-20220518185355376.png" alt="image-20220518185355376"></p>
+<h4 id="最优化原则"><a href="#最优化原则" class="headerlink" title="最优化原则"></a>最优化原则</h4><p><img src="/2022/05/18/ji-suan-ji-wang-luo/5-wang-luo-ceng-kong-zhi-ping-mian/image-20220518185820640.png" alt="image-20220518185820640"></p>
+<h4 id="dijk"><a href="#dijk" class="headerlink" title="dijk"></a>dijk</h4><p><img src="/2022/05/18/ji-suan-ji-wang-luo/5-wang-luo-ceng-kong-zhi-ping-mian/image-20220518190236865.png" alt="image-20220518190236865"></p>
+<h4 id="Bellman-Ford"><a href="#Bellman-Ford" class="headerlink" title="Bellman-Ford"></a>Bellman-Ford</h4><p><img src="/2022/05/18/ji-suan-ji-wang-luo/5-wang-luo-ceng-kong-zhi-ping-mian/image-20220518222705605.png" alt="image-20220518222705605"></p>
+<h3 id="自治系统内部的路由选择"><a href="#自治系统内部的路由选择" class="headerlink" title="自治系统内部的路由选择"></a>自治系统内部的路由选择</h3><h4 id="RIP"><a href="#RIP" class="headerlink" title="RIP"></a>RIP</h4><p><img src="/2022/05/18/ji-suan-ji-wang-luo/5-wang-luo-ceng-kong-zhi-ping-mian/image-20220518223212922.png" alt="image-20220518223212922"></p>
+<h4 id="OSPF"><a href="#OSPF" class="headerlink" title="OSPF"></a>OSPF</h4><p><img src="/2022/05/18/ji-suan-ji-wang-luo/5-wang-luo-ceng-kong-zhi-ping-mian/image-20220518223348839.png" alt="image-20220518223348839"></p>
+<p><img src="/2022/05/18/ji-suan-ji-wang-luo/5-wang-luo-ceng-kong-zhi-ping-mian/image-20220518223703341.png" alt="image-20220518223703341"></p>
+<h3 id="ISP-之间的路由选择：BGP"><a href="#ISP-之间的路由选择：BGP" class="headerlink" title="ISP 之间的路由选择：BGP"></a>ISP 之间的路由选择：BGP</h3><h4 id="层次路由"><a href="#层次路由" class="headerlink" title="层次路由"></a>层次路由</h4><p><img src="/2022/05/18/ji-suan-ji-wang-luo/5-wang-luo-ceng-kong-zhi-ping-mian/image-20220518224020576.png" alt="image-20220518224020576"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">gebilxs</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://gebilxs.github.io/2022/05/18/ji-suan-ji-wang-luo/5-wang-luo-ceng-kong-zhi-ping-mian/">https://gebilxs.github.io/2022/05/18/ji-suan-ji-wang-luo/5-wang-luo-ceng-kong-zhi-ping-mian/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://gebilxs.github.io" target="_blank">Gebilxs</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/./img/1648824822294.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/05/18/ji-suan-ji-wang-luo/4-wang-luo-ceng/"><img class="next-cover" src="/./img/1648824822294.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info"></div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/./img/photo-1650020660958-7826faba0824.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">gebilxs</div><div class="author-info__description"></div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/gebilxs"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/gebilxs" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">4.18前更新--"go blog API介绍" && "Docker & protainer 部署"</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2"><span class="toc-number">1.</span> <span class="toc-text">网络层控制平面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E7%AE%97%E6%B3%95"><span class="toc-number">1.1.</span> <span class="toc-text">路由选择算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.1.1.</span> <span class="toc-text">路由协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.2.</span> <span class="toc-text">路由概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%80%E4%BC%98%E5%8C%96%E5%8E%9F%E5%88%99"><span class="toc-number">1.1.3.</span> <span class="toc-text">最优化原则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dijk"><span class="toc-number">1.1.4.</span> <span class="toc-text">dijk</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Bellman-Ford"><span class="toc-number">1.1.5.</span> <span class="toc-text">Bellman-Ford</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E6%B2%BB%E7%B3%BB%E7%BB%9F%E5%86%85%E9%83%A8%E7%9A%84%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9"><span class="toc-number">1.2.</span> <span class="toc-text">自治系统内部的路由选择</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RIP"><span class="toc-number">1.2.1.</span> <span class="toc-text">RIP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OSPF"><span class="toc-number">1.2.2.</span> <span class="toc-text">OSPF</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ISP-%E4%B9%8B%E9%97%B4%E7%9A%84%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%EF%BC%9ABGP"><span class="toc-number">1.3.</span> <span class="toc-text">ISP 之间的路由选择：BGP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B1%82%E6%AC%A1%E8%B7%AF%E7%94%B1"><span class="toc-number">1.3.1.</span> <span class="toc-text">层次路由</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/05/18/ji-suan-ji-wang-luo/5-wang-luo-ceng-kong-zhi-ping-mian/" title="无题"><img src="/./img/1648824822294.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2022/05/18/ji-suan-ji-wang-luo/5-wang-luo-ceng-kong-zhi-ping-mian/" title="无题">无题</a><time datetime="2022-05-18T10:50:00.762Z" title="发表于 2022-05-18 18:50:00">2022-05-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/18/ji-suan-ji-wang-luo/4-wang-luo-ceng/" title="无题"><img src="/./img/1648824822294.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2022/05/18/ji-suan-ji-wang-luo/4-wang-luo-ceng/" title="无题">无题</a><time datetime="2022-05-18T07:20:14.929Z" title="发表于 2022-05-18 15:20:14">2022-05-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/15/ji-suan-ji-wang-luo/3-chuan-shu-ceng/" title="计算机网络 -- 概论"><img src="/./img/1648824822294.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="计算机网络 -- 概论"/></a><div class="content"><a class="title" href="/2022/05/15/ji-suan-ji-wang-luo/3-chuan-shu-ceng/" title="计算机网络 -- 概论">计算机网络 -- 概论</a><time datetime="2022-05-14T16:00:00.000Z" title="发表于 2022-05-15 00:00:00">2022-05-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/14/lesson-2/" title="无题"><img src="/./img/1648824822294.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2022/05/14/lesson-2/" title="无题">无题</a><time datetime="2022-05-14T14:12:07.372Z" title="发表于 2022-05-14 22:12:07">2022-05-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/14/ji-suan-ji-wang-luo/2-ying-yong-ceng/" title="计算机网络 -- 概论"><img src="/./img/1648824822294.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="计算机网络 -- 概论"/></a><div class="content"><a class="title" href="/2022/05/14/ji-suan-ji-wang-luo/2-ying-yong-ceng/" title="计算机网络 -- 概论">计算机网络 -- 概论</a><time datetime="2022-05-13T16:00:00.000Z" title="发表于 2022-05-14 00:00:00">2022-05-14</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent"><div id="footer-wrap"><div class="copyright">&copy;2022 By gebilxs</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

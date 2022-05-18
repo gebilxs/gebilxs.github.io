@@ -1,0 +1,155 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Gebilxs | Gebilxs</title><meta name="author" content="gebilxs"><meta name="copyright" content="gebilxs"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="集群镜像的概念 3.0版本就是一个安装包 孵化的开发者可以理解这个项目  为了让用户可以自定义 提出了cloudimage的概念 &#x2F;&#x2F;刻意区分这两个镜像  包含：内嵌k8s（docker），一些核心组件的配置，自定义的mysql,redis， 可以是k8s的文件, crd 类似于dockerfile  clusterfile 教你怎么运行 set example  可以放到dockerhub上面">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gebilxs">
+<meta property="og:url" content="https://gebilxs.github.io/2022/05/14/lesson-2/index.html">
+<meta property="og:site_name" content="Gebilxs">
+<meta property="og:description" content="集群镜像的概念 3.0版本就是一个安装包 孵化的开发者可以理解这个项目  为了让用户可以自定义 提出了cloudimage的概念 &#x2F;&#x2F;刻意区分这两个镜像  包含：内嵌k8s（docker），一些核心组件的配置，自定义的mysql,redis， 可以是k8s的文件, crd 类似于dockerfile  clusterfile 教你怎么运行 set example  可以放到dockerhub上面">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gebilxs.github.io/img/1648824822294.jpg">
+<meta property="article:published_time" content="2022-05-14T14:12:07.372Z">
+<meta property="article:modified_time" content="2022-05-14T16:24:23.666Z">
+<meta property="article:author" content="gebilxs">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gebilxs.github.io/img/1648824822294.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://gebilxs.github.io/2022/05/14/lesson-2/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Gebilxs',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-05-15 00:24:23'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.1.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Gebilxs" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/./img/photo-1650020660958-7826faba0824.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 连接</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/./img/1648824822294.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Gebilxs</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 连接</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">无题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-14T14:12:07.372Z" title="发表于 2022-05-14 22:12:07">2022-05-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-05-14T16:24:23.666Z" title="更新于 2022-05-15 00:24:23">2022-05-15</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>集群镜像的概念</p>
+<p>3.0版本就是一个安装包</p>
+<p>孵化的开发者可以理解这个项目</p>
+<p><img src="/2022/05/14/lesson-2/image-20220514221357459.png" alt="image-20220514221357459"></p>
+<p>为了让用户可以自定义</p>
+<p>提出了cloudimage的概念 //刻意区分这两个镜像</p>
+<p><img src="/2022/05/14/lesson-2/image-20220514221436826.png" alt="image-20220514221436826"></p>
+<p>包含：内嵌k8s（docker），一些核心组件的配置，自定义的mysql,redis，</p>
+<p>可以是k8s的文件, crd</p>
+<p>类似于dockerfile</p>
+<p><img src="/2022/05/14/lesson-2/image-20220514221840021.png" alt="image-20220514221840021"></p>
+<p>clusterfile 教你怎么运行</p>
+<p>set example</p>
+<p><img src="/2022/05/14/lesson-2/image-20220514221929616.png" alt="image-20220514221929616"></p>
+<p>可以放到dockerhub上面</p>
+<p>k8sfile的原理</p>
+<p><img src="/2022/05/14/lesson-2/image-20220514222108065.png" alt="image-20220514222108065"></p>
+<p>images 私有镜像仓库</p>
+<p>script   放置脚本</p>
+<p>叫haitao</p>
+<p>集群镜像完全兼容docker</p>
+<p>sealos 集成了build的东西</p>
+<p>registry 比较特别/image不用copy/manifest 不是都能解析的</p>
+<p>builder 不会缓存数据</p>
+<p>sealer 和 sealos</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">gebilxs</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://gebilxs.github.io/2022/05/14/lesson-2/">https://gebilxs.github.io/2022/05/14/lesson-2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://gebilxs.github.io" target="_blank">Gebilxs</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/./img/1648824822294.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/05/15/ji-suan-ji-wang-luo/3-chuan-shu-ceng/"><img class="prev-cover" src="/./img/1648824822294.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">计算机网络 -- 概论</div></div></a></div><div class="next-post pull-right"><a href="/2022/05/14/ji-suan-ji-wang-luo/2-ying-yong-ceng/"><img class="next-cover" src="/./img/1648824822294.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">计算机网络 -- 概论</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/./img/photo-1650020660958-7826faba0824.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">gebilxs</div><div class="author-info__description"></div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/gebilxs"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/gebilxs" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">4.18前更新--"go blog API介绍" && "Docker & protainer 部署"</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/05/18/ji-suan-ji-wang-luo/5-wang-luo-ceng-kong-zhi-ping-mian/" title="无题"><img src="/./img/1648824822294.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2022/05/18/ji-suan-ji-wang-luo/5-wang-luo-ceng-kong-zhi-ping-mian/" title="无题">无题</a><time datetime="2022-05-18T10:50:00.762Z" title="发表于 2022-05-18 18:50:00">2022-05-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/18/ji-suan-ji-wang-luo/4-wang-luo-ceng/" title="无题"><img src="/./img/1648824822294.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2022/05/18/ji-suan-ji-wang-luo/4-wang-luo-ceng/" title="无题">无题</a><time datetime="2022-05-18T07:20:14.929Z" title="发表于 2022-05-18 15:20:14">2022-05-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/15/ji-suan-ji-wang-luo/3-chuan-shu-ceng/" title="计算机网络 -- 概论"><img src="/./img/1648824822294.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="计算机网络 -- 概论"/></a><div class="content"><a class="title" href="/2022/05/15/ji-suan-ji-wang-luo/3-chuan-shu-ceng/" title="计算机网络 -- 概论">计算机网络 -- 概论</a><time datetime="2022-05-14T16:00:00.000Z" title="发表于 2022-05-15 00:00:00">2022-05-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/14/lesson-2/" title="无题"><img src="/./img/1648824822294.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2022/05/14/lesson-2/" title="无题">无题</a><time datetime="2022-05-14T14:12:07.372Z" title="发表于 2022-05-14 22:12:07">2022-05-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/14/ji-suan-ji-wang-luo/2-ying-yong-ceng/" title="计算机网络 -- 概论"><img src="/./img/1648824822294.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="计算机网络 -- 概论"/></a><div class="content"><a class="title" href="/2022/05/14/ji-suan-ji-wang-luo/2-ying-yong-ceng/" title="计算机网络 -- 概论">计算机网络 -- 概论</a><time datetime="2022-05-13T16:00:00.000Z" title="发表于 2022-05-14 00:00:00">2022-05-14</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent"><div id="footer-wrap"><div class="copyright">&copy;2022 By gebilxs</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

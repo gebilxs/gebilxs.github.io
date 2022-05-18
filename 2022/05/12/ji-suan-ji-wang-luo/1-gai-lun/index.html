@@ -1,0 +1,224 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>计算机网络 -- 概论 | Gebilxs</title><meta name="keywords" content="考试,计算机网络"><meta name="author" content="gebilxs"><meta name="copyright" content="gebilxs"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="计算机网络 -概论Internet具体构成   协议的具体阐释 服务角度 网络边缘介绍网络结构 具体呈现形式 网络边缘：采用网络设施的面向连接服务 网络核心网络核心：电路交换 独享一定能够获得性能的保障     课堂例题 电路交换不适合计算机之间的通信 分组交换 分组交换：存储-转发  分组交换：排队延迟和丢失  分组交换：统计多路复用 分组交换&amp;&amp;电路交换 流量强度为1的情况会挂">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络 -- 概论">
+<meta property="og:url" content="https://gebilxs.github.io/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/index.html">
+<meta property="og:site_name" content="Gebilxs">
+<meta property="og:description" content="计算机网络 -概论Internet具体构成   协议的具体阐释 服务角度 网络边缘介绍网络结构 具体呈现形式 网络边缘：采用网络设施的面向连接服务 网络核心网络核心：电路交换 独享一定能够获得性能的保障     课堂例题 电路交换不适合计算机之间的通信 分组交换 分组交换：存储-转发  分组交换：排队延迟和丢失  分组交换：统计多路复用 分组交换&amp;&amp;电路交换 流量强度为1的情况会挂">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gebilxs.github.io/img/1648824822294.jpg">
+<meta property="article:published_time" content="2022-05-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-14T07:01:58.471Z">
+<meta property="article:author" content="gebilxs">
+<meta property="article:tag" content="考试">
+<meta property="article:tag" content="计算机网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gebilxs.github.io/img/1648824822294.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://gebilxs.github.io/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '计算机网络 -- 概论',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-05-14 15:01:58'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.1.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Gebilxs" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/./img/photo-1650020660958-7826faba0824.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 连接</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/./img/1648824822294.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Gebilxs</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 连接</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">计算机网络 -- 概论</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-11T16:00:00.000Z" title="发表于 2022-05-12 00:00:00">2022-05-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-05-14T07:01:58.471Z" title="更新于 2022-05-14 15:01:58">2022-05-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="计算机网络 -- 概论"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="计算机网络-概论"><a href="#计算机网络-概论" class="headerlink" title="计算机网络 -概论"></a>计算机网络 -概论</h2><h3 id="Internet"><a href="#Internet" class="headerlink" title="Internet"></a>Internet</h3><h4 id="具体构成"><a href="#具体构成" class="headerlink" title="具体构成"></a>具体构成</h4><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220512122743068.png" alt="image-20220512122743068"></p>
+<p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220512122815660.png" alt="image-20220512122815660"></p>
+<p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220512122853073.png" alt="image-20220512122853073"></p>
+<h5 id="协议的具体阐释"><a href="#协议的具体阐释" class="headerlink" title="协议的具体阐释"></a>协议的具体阐释</h5><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220512123557279.png" alt="image-20220512123557279"></p>
+<h4 id="服务角度"><a href="#服务角度" class="headerlink" title="服务角度"></a>服务角度</h4><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220512123627356.png" alt="image-20220512123627356"></p>
+<h3 id="网络边缘"><a href="#网络边缘" class="headerlink" title="网络边缘"></a>网络边缘</h3><h4 id="介绍网络结构"><a href="#介绍网络结构" class="headerlink" title="介绍网络结构"></a>介绍网络结构</h4><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220512123724988.png" alt="image-20220512123724988"></p>
+<h4 id="具体呈现形式"><a href="#具体呈现形式" class="headerlink" title="具体呈现形式"></a>具体呈现形式</h4><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220512123847421.png" alt="image-20220512123847421"></p>
+<h4 id="网络边缘：采用网络设施的面向连接服务"><a href="#网络边缘：采用网络设施的面向连接服务" class="headerlink" title="网络边缘：采用网络设施的面向连接服务"></a>网络边缘：采用网络设施的面向连接服务</h4><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220512124133326.png" alt="image-20220512124133326"></p>
+<h3 id="网络核心"><a href="#网络核心" class="headerlink" title="网络核心"></a>网络核心</h3><h4 id="网络核心：电路交换"><a href="#网络核心：电路交换" class="headerlink" title="网络核心：电路交换"></a>网络核心：电路交换</h4><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514114515040.png" alt="image-20220514114515040"></p>
+<pre class="line-numbers language-none"><code class="language-none">独享一定能够获得性能的保障<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514115623313.png" alt="image-20220514115623313"></p>
+<h4 id="课堂例题"><a href="#课堂例题" class="headerlink" title="课堂例题"></a>课堂例题</h4><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514124254474.png" alt="image-20220514124254474"></p>
+<h4 id="电路交换不适合计算机之间的通信"><a href="#电路交换不适合计算机之间的通信" class="headerlink" title="电路交换不适合计算机之间的通信"></a>电路交换不适合计算机之间的通信</h4><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514124441347.png" alt="image-20220514124441347"></p>
+<h4 id="分组交换"><a href="#分组交换" class="headerlink" title="分组交换"></a>分组交换</h4><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514124940870.png" alt="image-20220514124940870"></p>
+<h5 id="分组交换：存储-转发"><a href="#分组交换：存储-转发" class="headerlink" title="分组交换：存储-转发"></a>分组交换：存储-转发</h5><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514125015827.png" alt="image-20220514125015827"></p>
+<p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514130920834.png" alt="image-20220514130920834"></p>
+<h5 id="分组交换：排队延迟和丢失"><a href="#分组交换：排队延迟和丢失" class="headerlink" title="分组交换：排队延迟和丢失"></a>分组交换：排队延迟和丢失</h5><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514125244485.png" alt="image-20220514125244485"></p>
+<p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514125449257.png" alt="image-20220514125449257"></p>
+<h5 id="分组交换：统计多路复用"><a href="#分组交换：统计多路复用" class="headerlink" title="分组交换：统计多路复用"></a>分组交换：统计多路复用</h5><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514125639461.png" alt="image-20220514125639461"></p>
+<h4 id="分组交换-amp-amp-电路交换"><a href="#分组交换-amp-amp-电路交换" class="headerlink" title="分组交换&amp;&amp;电路交换"></a>分组交换&amp;&amp;电路交换</h4><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514125715095.png" alt="image-20220514125715095"></p>
+<pre class="line-numbers language-none"><code class="language-none">流量强度为1的情况会挂<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514130736786.png" alt="image-20220514130736786"></p>
+<h4 id="数据报的工作原理"><a href="#数据报的工作原理" class="headerlink" title="数据报的工作原理"></a>数据报的工作原理</h4><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514131059573.png" alt="image-20220514131059573"></p>
+<h4 id="虚电路的工作原理"><a href="#虚电路的工作原理" class="headerlink" title="虚电路的工作原理"></a>虚电路的工作原理</h4><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514131231541.png" alt="j"></p>
+<h3 id="接入网和物理媒体"><a href="#接入网和物理媒体" class="headerlink" title="接入网和物理媒体"></a>接入网和物理媒体</h3><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514131837489.png" alt="image-20220514131837489"></p>
+<h4 id="住宅介入：modem"><a href="#住宅介入：modem" class="headerlink" title="住宅介入：modem"></a>住宅介入：modem</h4><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514132032877.png" alt="image-20220514132032877"></p>
+<h4 id="接入网：线缆网络"><a href="#接入网：线缆网络" class="headerlink" title="接入网：线缆网络"></a>接入网：线缆网络</h4><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514132423451.png" alt="image-20220514132423451"></p>
+<p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514132638995-16525060002201.png" alt="image-20220514132638995"></p>
+<h4 id="接入网：家庭网络"><a href="#接入网：家庭网络" class="headerlink" title="接入网：家庭网络"></a>接入网：家庭网络</h4><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514132815285.png" alt="image-20220514132815285"></p>
+<h4 id="企业接入网络"><a href="#企业接入网络" class="headerlink" title="企业接入网络"></a>企业接入网络</h4><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514132920836.png" alt="image-20220514132920836"></p>
+<h4 id="无线接入网络"><a href="#无线接入网络" class="headerlink" title="无线接入网络"></a>无线接入网络</h4><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514133016488.png" alt="image-20220514133016488"></p>
+<h4 id="物理媒体"><a href="#物理媒体" class="headerlink" title="物理媒体"></a>物理媒体</h4><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514133224051.png" alt="image-20220514133224051"></p>
+<h5 id="无限链路"><a href="#无限链路" class="headerlink" title="无限链路"></a>无限链路</h5><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514133616134.png" alt="image-20220514133616134"></p>
+<h3 id="Internet-和-isp"><a href="#Internet-和-isp" class="headerlink" title="Internet 和 isp"></a>Internet 和 isp</h3><h4 id="互联网的网络结构：网络的网络"><a href="#互联网的网络结构：网络的网络" class="headerlink" title="互联网的网络结构：网络的网络"></a>互联网的网络结构：网络的网络</h4><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514133948565.png" alt="image-20220514133948565"></p>
+<pre class="line-numbers language-none"><code class="language-none">如果有几十万个ISP怎么办？
+-- 出现global ISP
+各种global ISP存在竞争和合作<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514134853301.png" alt="image-20220514134853301"></p>
+<p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514135005161.png" alt="image-20220514135005161"></p>
+<h4 id="ISP之间的连接"><a href="#ISP之间的连接" class="headerlink" title="ISP之间的连接"></a>ISP之间的连接</h4><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514135113401.png" alt="image-20220514135113401"></p>
+<h3 id="分组延时、丢失和吞吐量"><a href="#分组延时、丢失和吞吐量" class="headerlink" title="分组延时、丢失和吞吐量"></a>分组延时、丢失和吞吐量</h3><h4 id="分组丢失和延时"><a href="#分组丢失和延时" class="headerlink" title="分组丢失和延时"></a>分组丢失和延时</h4><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514135502704.png" alt="image-20220514135502704"></p>
+<h4 id="四种延时"><a href="#四种延时" class="headerlink" title="四种延时"></a>四种延时</h4><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514135529753.png" alt="image-20220514135529753"></p>
+<p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514135637479.png" alt="image-20220514135637479"></p>
+<h4 id="车队类比"><a href="#车队类比" class="headerlink" title="车队类比"></a>车队类比</h4><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514135926898.png" alt="image-20220514135926898"></p>
+<pre class="line-numbers language-none"><code class="language-none">这种情况更像是WAN的情况，传播时延需要考虑
+而如果是第一个点已经到了B处，而后面还没有发完，那么这种情况更像是一种WAN的情况<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+
+<h4 id="节点时延"><a href="#节点时延" class="headerlink" title="节点时延"></a>节点时延</h4><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514140334847.png" alt="image-20220514140334847"></p>
+<h5 id="排队延时"><a href="#排队延时" class="headerlink" title="排队延时"></a>排队延时</h5><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514140542817.png" alt="image-20220514140542817"></p>
+<h4 id="Internet的延时和路由"><a href="#Internet的延时和路由" class="headerlink" title="Internet的延时和路由"></a>Internet的延时和路由</h4><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514140720661.png" alt="image-20220514140720661"></p>
+<pre class="line-numbers language-none"><code class="language-none">ICMP 基于TTL可以知道 RTT<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="分组丢失"><a href="#分组丢失" class="headerlink" title="分组丢失"></a>分组丢失</h4><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514141209776.png" alt="image-20220514141209776"></p>
+<pre class="line-numbers language-none"><code class="language-none">3种重传的可能：
+1、上一条重传
+2、源主机重传
+3、UDP丢失不重传（数据链路提供不可靠的服务）<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h4 id="吞吐量"><a href="#吞吐量" class="headerlink" title="吞吐量"></a>吞吐量</h4><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514141527855.png" alt="image-20220514141527855"></p>
+<pre class="line-numbers language-none"><code class="language-none">取决于吞吐量最小的管道<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514141818800.png" alt="image-20220514141818800"></p>
+<h3 id="协议层次及服务模型"><a href="#协议层次及服务模型" class="headerlink" title="协议层次及服务模型"></a>协议层次及服务模型</h3><h4 id="协议层次"><a href="#协议层次" class="headerlink" title="协议层次"></a>协议层次</h4><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514141934008.png" alt="image-20220514141934008"></p>
+<h4 id="服务和服务访问点"><a href="#服务和服务访问点" class="headerlink" title="服务和服务访问点"></a>服务和服务访问点</h4><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514142905750.png" alt="image-20220514142905750"></p>
+<h4 id="服务和协议"><a href="#服务和协议" class="headerlink" title="服务和协议"></a>服务和协议</h4><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514143639576.png" alt="image-20220514143639576"></p>
+<h4 id="数据单元（DU）"><a href="#数据单元（DU）" class="headerlink" title="数据单元（DU）"></a>数据单元（DU）</h4><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514143719520.png" alt="image-20220514143719520"></p>
+<pre class="line-numbers language-none"><code class="language-none">SDU是上层的
+转换成本城的PDU
+可以存在一对多，一对一，多对一的关系<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h4 id="Internet协议栈"><a href="#Internet协议栈" class="headerlink" title="Internet协议栈"></a>Internet协议栈</h4><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514144343207.png" alt="image-20220514144343207"></p>
+<h4 id="ISO-x2F-osi-参考模型"><a href="#ISO-x2F-osi-参考模型" class="headerlink" title="ISO/osi 参考模型"></a>ISO/osi 参考模型</h4><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514144949398.png" alt="image-20220514144949398"></p>
+<h4 id="封装和解封装"><a href="#封装和解封装" class="headerlink" title="封装和解封装"></a>封装和解封装</h4><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514145130082.png" alt="image-20220514145130082"></p>
+<pre class="line-numbers language-none"><code class="language-none">路由器做 3层封装/解封装
+交换机做 2层封装/解封装 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+
+<h4 id="各层次的协议数据单元"><a href="#各层次的协议数据单元" class="headerlink" title="各层次的协议数据单元"></a>各层次的协议数据单元</h4><p><img src="/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/image-20220514145933336.png" alt="image-20220514145933336"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">gebilxs</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://gebilxs.github.io/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/">https://gebilxs.github.io/2022/05/12/ji-suan-ji-wang-luo/1-gai-lun/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://gebilxs.github.io" target="_blank">Gebilxs</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%80%83%E8%AF%95/">考试</a><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></div><div class="post_share"><div class="social-share" data-image="/./img/1648824822294.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/05/13/k8s/lesson-1/"><img class="prev-cover" src="/./img/1648824822294.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info"></div></div></a></div><div class="next-post pull-right"><a href="/2022/05/08/bytedance/byte-dance-lesson2/"><img class="next-cover" src="/./img/1648824822294.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info"></div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/./img/photo-1650020660958-7826faba0824.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">gebilxs</div><div class="author-info__description"></div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/gebilxs"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/gebilxs" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">4.18前更新--"go blog API介绍" && "Docker & protainer 部署"</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E6%A6%82%E8%AE%BA"><span class="toc-number">1.</span> <span class="toc-text">计算机网络 -概论</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Internet"><span class="toc-number">1.1.</span> <span class="toc-text">Internet</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E6%9E%84%E6%88%90"><span class="toc-number">1.1.1.</span> <span class="toc-text">具体构成</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%85%B7%E4%BD%93%E9%98%90%E9%87%8A"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">协议的具体阐释</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E8%A7%92%E5%BA%A6"><span class="toc-number">1.1.2.</span> <span class="toc-text">服务角度</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E8%BE%B9%E7%BC%98"><span class="toc-number">1.2.</span> <span class="toc-text">网络边缘</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.1.</span> <span class="toc-text">介绍网络结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E5%91%88%E7%8E%B0%E5%BD%A2%E5%BC%8F"><span class="toc-number">1.2.2.</span> <span class="toc-text">具体呈现形式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E8%BE%B9%E7%BC%98%EF%BC%9A%E9%87%87%E7%94%A8%E7%BD%91%E7%BB%9C%E8%AE%BE%E6%96%BD%E7%9A%84%E9%9D%A2%E5%90%91%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.2.3.</span> <span class="toc-text">网络边缘：采用网络设施的面向连接服务</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83"><span class="toc-number">1.3.</span> <span class="toc-text">网络核心</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83%EF%BC%9A%E7%94%B5%E8%B7%AF%E4%BA%A4%E6%8D%A2"><span class="toc-number">1.3.1.</span> <span class="toc-text">网络核心：电路交换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%BE%E5%A0%82%E4%BE%8B%E9%A2%98"><span class="toc-number">1.3.2.</span> <span class="toc-text">课堂例题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%B5%E8%B7%AF%E4%BA%A4%E6%8D%A2%E4%B8%8D%E9%80%82%E5%90%88%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B9%8B%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1"><span class="toc-number">1.3.3.</span> <span class="toc-text">电路交换不适合计算机之间的通信</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2"><span class="toc-number">1.3.4.</span> <span class="toc-text">分组交换</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2%EF%BC%9A%E5%AD%98%E5%82%A8-%E8%BD%AC%E5%8F%91"><span class="toc-number">1.3.4.1.</span> <span class="toc-text">分组交换：存储-转发</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2%EF%BC%9A%E6%8E%92%E9%98%9F%E5%BB%B6%E8%BF%9F%E5%92%8C%E4%B8%A2%E5%A4%B1"><span class="toc-number">1.3.4.2.</span> <span class="toc-text">分组交换：排队延迟和丢失</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2%EF%BC%9A%E7%BB%9F%E8%AE%A1%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8"><span class="toc-number">1.3.4.3.</span> <span class="toc-text">分组交换：统计多路复用</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2-amp-amp-%E7%94%B5%E8%B7%AF%E4%BA%A4%E6%8D%A2"><span class="toc-number">1.3.5.</span> <span class="toc-text">分组交换&amp;&amp;电路交换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%8A%A5%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">1.3.6.</span> <span class="toc-text">数据报的工作原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%99%9A%E7%94%B5%E8%B7%AF%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">1.3.7.</span> <span class="toc-text">虚电路的工作原理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%85%A5%E7%BD%91%E5%92%8C%E7%89%A9%E7%90%86%E5%AA%92%E4%BD%93"><span class="toc-number">1.4.</span> <span class="toc-text">接入网和物理媒体</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%8F%E5%AE%85%E4%BB%8B%E5%85%A5%EF%BC%9Amodem"><span class="toc-number">1.4.1.</span> <span class="toc-text">住宅介入：modem</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A5%E5%85%A5%E7%BD%91%EF%BC%9A%E7%BA%BF%E7%BC%86%E7%BD%91%E7%BB%9C"><span class="toc-number">1.4.2.</span> <span class="toc-text">接入网：线缆网络</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A5%E5%85%A5%E7%BD%91%EF%BC%9A%E5%AE%B6%E5%BA%AD%E7%BD%91%E7%BB%9C"><span class="toc-number">1.4.3.</span> <span class="toc-text">接入网：家庭网络</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%81%E4%B8%9A%E6%8E%A5%E5%85%A5%E7%BD%91%E7%BB%9C"><span class="toc-number">1.4.4.</span> <span class="toc-text">企业接入网络</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%A0%E7%BA%BF%E6%8E%A5%E5%85%A5%E7%BD%91%E7%BB%9C"><span class="toc-number">1.4.5.</span> <span class="toc-text">无线接入网络</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%A9%E7%90%86%E5%AA%92%E4%BD%93"><span class="toc-number">1.4.6.</span> <span class="toc-text">物理媒体</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%97%A0%E9%99%90%E9%93%BE%E8%B7%AF"><span class="toc-number">1.4.6.1.</span> <span class="toc-text">无限链路</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Internet-%E5%92%8C-isp"><span class="toc-number">1.5.</span> <span class="toc-text">Internet 和 isp</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%92%E8%81%94%E7%BD%91%E7%9A%84%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84%EF%BC%9A%E7%BD%91%E7%BB%9C%E7%9A%84%E7%BD%91%E7%BB%9C"><span class="toc-number">1.5.1.</span> <span class="toc-text">互联网的网络结构：网络的网络</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ISP%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BF%9E%E6%8E%A5"><span class="toc-number">1.5.2.</span> <span class="toc-text">ISP之间的连接</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%BB%84%E5%BB%B6%E6%97%B6%E3%80%81%E4%B8%A2%E5%A4%B1%E5%92%8C%E5%90%9E%E5%90%90%E9%87%8F"><span class="toc-number">1.6.</span> <span class="toc-text">分组延时、丢失和吞吐量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E7%BB%84%E4%B8%A2%E5%A4%B1%E5%92%8C%E5%BB%B6%E6%97%B6"><span class="toc-number">1.6.1.</span> <span class="toc-text">分组丢失和延时</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B%E7%A7%8D%E5%BB%B6%E6%97%B6"><span class="toc-number">1.6.2.</span> <span class="toc-text">四种延时</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BD%A6%E9%98%9F%E7%B1%BB%E6%AF%94"><span class="toc-number">1.6.3.</span> <span class="toc-text">车队类比</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8A%82%E7%82%B9%E6%97%B6%E5%BB%B6"><span class="toc-number">1.6.4.</span> <span class="toc-text">节点时延</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8E%92%E9%98%9F%E5%BB%B6%E6%97%B6"><span class="toc-number">1.6.4.1.</span> <span class="toc-text">排队延时</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Internet%E7%9A%84%E5%BB%B6%E6%97%B6%E5%92%8C%E8%B7%AF%E7%94%B1"><span class="toc-number">1.6.5.</span> <span class="toc-text">Internet的延时和路由</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E7%BB%84%E4%B8%A2%E5%A4%B1"><span class="toc-number">1.6.6.</span> <span class="toc-text">分组丢失</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%9E%E5%90%90%E9%87%8F"><span class="toc-number">1.6.7.</span> <span class="toc-text">吞吐量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E5%B1%82%E6%AC%A1%E5%8F%8A%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.7.</span> <span class="toc-text">协议层次及服务模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E5%B1%82%E6%AC%A1"><span class="toc-number">1.7.1.</span> <span class="toc-text">协议层次</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%92%8C%E6%9C%8D%E5%8A%A1%E8%AE%BF%E9%97%AE%E7%82%B9"><span class="toc-number">1.7.2.</span> <span class="toc-text">服务和服务访问点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%92%8C%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.7.3.</span> <span class="toc-text">服务和协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%8D%95%E5%85%83%EF%BC%88DU%EF%BC%89"><span class="toc-number">1.7.4.</span> <span class="toc-text">数据单元（DU）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Internet%E5%8D%8F%E8%AE%AE%E6%A0%88"><span class="toc-number">1.7.5.</span> <span class="toc-text">Internet协议栈</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ISO-x2F-osi-%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.7.6.</span> <span class="toc-text">ISO&#x2F;osi 参考模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%81%E8%A3%85%E5%92%8C%E8%A7%A3%E5%B0%81%E8%A3%85"><span class="toc-number">1.7.7.</span> <span class="toc-text">封装和解封装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%84%E5%B1%82%E6%AC%A1%E7%9A%84%E5%8D%8F%E8%AE%AE%E6%95%B0%E6%8D%AE%E5%8D%95%E5%85%83"><span class="toc-number">1.7.8.</span> <span class="toc-text">各层次的协议数据单元</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/05/18/ji-suan-ji-wang-luo/5-wang-luo-ceng-kong-zhi-ping-mian/" title="无题"><img src="/./img/1648824822294.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2022/05/18/ji-suan-ji-wang-luo/5-wang-luo-ceng-kong-zhi-ping-mian/" title="无题">无题</a><time datetime="2022-05-18T10:50:00.762Z" title="发表于 2022-05-18 18:50:00">2022-05-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/18/ji-suan-ji-wang-luo/4-wang-luo-ceng/" title="无题"><img src="/./img/1648824822294.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2022/05/18/ji-suan-ji-wang-luo/4-wang-luo-ceng/" title="无题">无题</a><time datetime="2022-05-18T07:20:14.929Z" title="发表于 2022-05-18 15:20:14">2022-05-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/15/ji-suan-ji-wang-luo/3-chuan-shu-ceng/" title="计算机网络 -- 概论"><img src="/./img/1648824822294.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="计算机网络 -- 概论"/></a><div class="content"><a class="title" href="/2022/05/15/ji-suan-ji-wang-luo/3-chuan-shu-ceng/" title="计算机网络 -- 概论">计算机网络 -- 概论</a><time datetime="2022-05-14T16:00:00.000Z" title="发表于 2022-05-15 00:00:00">2022-05-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/14/lesson-2/" title="无题"><img src="/./img/1648824822294.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2022/05/14/lesson-2/" title="无题">无题</a><time datetime="2022-05-14T14:12:07.372Z" title="发表于 2022-05-14 22:12:07">2022-05-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/14/ji-suan-ji-wang-luo/2-ying-yong-ceng/" title="计算机网络 -- 概论"><img src="/./img/1648824822294.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="计算机网络 -- 概论"/></a><div class="content"><a class="title" href="/2022/05/14/ji-suan-ji-wang-luo/2-ying-yong-ceng/" title="计算机网络 -- 概论">计算机网络 -- 概论</a><time datetime="2022-05-13T16:00:00.000Z" title="发表于 2022-05-14 00:00:00">2022-05-14</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent"><div id="footer-wrap"><div class="copyright">&copy;2022 By gebilxs</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
