@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>微服务 on gebilxs Blog</title>
+    <link>https://gebilxs.github.io/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/</link>
+    <description>Recent content in 微服务 on gebilxs Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 28 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://gebilxs.github.io/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Title!!Welcome to1 gebilxs Blog</title>
+      <link>https://gebilxs.github.io/2022/12/28/hello-world1/</link>
+      <pubDate>Wed, 28 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://gebilxs.github.io/2022/12/28/hello-world1/</guid>
+      <description>“Yeah It&amp;rsquo;s on. ” Hello World! this is a test!</description>
+    </item>
+    
+  </channel>
+</rss>
