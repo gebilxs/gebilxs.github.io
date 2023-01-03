@@ -6,7 +6,16 @@
     <description>Recent content in Tags on gebilxs Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 28 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://gebilxs.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 03 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://gebilxs.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Algorithm</title>
+      <link>https://gebilxs.github.io/tags/algorithm/</link>
+      <pubDate>Tue, 03 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://gebilxs.github.io/tags/algorithm/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Microservice</title>
       <link>https://gebilxs.github.io/tags/microservice/</link>

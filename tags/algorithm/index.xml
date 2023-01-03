@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on gebilxs Blog</title>
-    <link>https://gebilxs.github.io/post/</link>
-    <description>Recent content in Posts on gebilxs Blog</description>
+    <title>Algorithm on gebilxs Blog</title>
+    <link>https://gebilxs.github.io/tags/algorithm/</link>
+    <description>Recent content in Algorithm on gebilxs Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 03 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://gebilxs.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 03 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://gebilxs.github.io/tags/algorithm/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Acwing每日一题算法记录</title>
       <link>https://gebilxs.github.io/2022/1/3/AcwingEveryDay/</link>
@@ -23,15 +23,6 @@
       
       <guid>https://gebilxs.github.io/2022/1/3/LeetcodeEveryDay/</guid>
       <description>2023.1.3 2042.检查句子中的数字是否递增 题目链接 https://leetcode.cn/problems/check-if-numbers-are-ascending-in-a-sentence/ 题解 https://leetcode.cn/problems/check-if-numbers-are-ascending-in-a-sentence/solution/2042-by-gebilxs-lgcp/</description>
-    </item>
-    
-    <item>
-      <title>Title!!Welcome to gebilxs Blog</title>
-      <link>https://gebilxs.github.io/2022/12/28/hello-world/</link>
-      <pubDate>Wed, 28 Dec 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://gebilxs.github.io/2022/12/28/hello-world/</guid>
-      <description>“Yeah It&amp;rsquo;s on. ” Hello World! this is a test!</description>
     </item>
     
   </channel>
