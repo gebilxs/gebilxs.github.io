@@ -15,9 +15,9 @@
     
 
     
-    <meta name="title" content="" />
-    <meta property="og:title" content="" />
-    <meta property="twitter:title" content="" />
+    <meta name="title" content="科研" />
+    <meta property="og:title" content="科研" />
+    <meta property="twitter:title" content="科研" />
     
 
     
@@ -34,9 +34,9 @@
     <meta name="keyword"  content="gebilxs, zhaohuabing, Zhaohuabing, , 赵化冰的博客, gebilxs Blog, 博客, 个人网站, 互联网, Web, 微服务, Microservice">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>gebilxs的博客 | gebilxs Blog</title>
+    <title>科研 | gebilxs的博客 | gebilxs Blog</title>
 
-    <link rel="canonical" href="/about/">
+    <link rel="canonical" href="/categories/%E7%A7%91%E7%A0%94/">
 
     
     
@@ -169,90 +169,56 @@
 
 
 
-
-<article>
-    <div class="container">
-        <div class="row">
-            
-            <div class="
+  
+<div data-pagefind-ignore="all" class="container">
+    <div class="row">
+        
+        
+   	    <div class="
             col-lg-8 col-lg-offset-1
             col-md-8 col-md-offset-1
             col-sm-12
             col-xs-12
-            post-container">
+            post-container
+        ">
             
-                 
- <select class="sel-lang" onchange= "onLanChange(this.options[this.options.selectedIndex].value)">
-    <option value="0" selected> 中文 | Chinese </option>
-    <option value="1"> 英文 | English </option>
-</select>
+<div data-pagefind-ignore="all">
 
-                
-                <div class="zh post-container">
-                    
-                    <h2 id="关于我">关于我</h2>
-<p>Hi，我是徐踔锟。</p>
-<p>我来自天津理工大学，是计算机学院大学三年级的本科生。</p>
-<p>我最近在尝试学习go语言，同时面临考研的选择。</p>
-<h2 id="开源项目">开源项目</h2>
-<table>
-<thead>
-<tr>
-<th>项目</th>
-<th>角色</th>
-<th>网站</th>
-<th>GitHub</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Weber</td>
-<td>创建者</td>
-<td>尚未上线</td>
-<td><a href="https://github.com/gebilxs/weber">https://github.com/gebilxs/weber</a></td>
-</tr>
-</tbody>
-</table>
+<div class="post-preview">
+    <a href="https://gebilxs.github.io/2022/1/3/LeetcodeEveryDay/">
+        <h2 class="post-title">
+            Leetcode每日一题算法记录
+        </h2>
+	
+        <h3 class="post-subtitle">
+            这里记录Leetcode每日一题算法
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            这里希望打卡从2023.1.3开始的Leetcode每日一题算法
+        
+        </div>
+    </a>
+    <p class="post-meta">
+    
+        Posted by gebilxs on Tuesday, January 3, 2023
+        
+        
+    
+    </p>
 
-                </div>
-            
-                
-                <div class="en post-container">
-                    <h2 id="about-me">About Me</h2>
-<p>Hi, I&rsquo;m Xu Chuokun.</p>
-<p>I am from Tianjin University of Technology, and I am a third-year undergraduate student in the School of Computer Science.</p>
-<p>I am trying to learn the go language recently, and at the same time I am facing the choice of postgraduate entrance examination.</p>
-<h2 id="open-source-projects">Open Source Projects</h2>
-<table>
-<thead>
-<tr>
-<th>Project</th>
-<th>Role</th>
-<th>Website</th>
-<th>GitHub</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Weber</td>
-<td>Creator</td>
-<td>Not yet online</td>
-<td><a href="https://github.com/gebilxs/weber">https://github.com/gebilxs/weber</a></td>
-</tr>
-</tbody>
-</table>
+</div>
+<hr>
 
-                </div>
-            
-             
+</div>
+
             
 
 
 
-            
-            </div>
-            
-            
+       	</div>
+        
 
 <div class="
     col-lg-3 col-lg-offset-0
@@ -326,9 +292,9 @@
     
 </div>
 
-        </div>
-    </div>
-</article>
+	</div>
+</div>
+
 
 
 
@@ -497,57 +463,6 @@
 </script>
 
 
-
-<script type="text/javascript">
-    
-    var $zh = document.querySelector(".zh");
-    var $en = document.querySelector(".en");
-    var $select = document.querySelector("select");
-
-    
-    function getLang() { return new URLSearchParams(document.location.search).get("lang") }
-
-    function setLang(newLang) {
-        var params = new URLSearchParams(document.location.search)
-        params.set("lang", newLang)
-        document.location.search = params.toString()  
-    }
-
-    
-    function _render() {
-        var lang = getLang()
-        
-        if (lang == "en") {
-            $select.selectedIndex = 1;
-            $en.style.display = "block";
-            $en.classList.add("active");
-            $zh.style.display = "none";
-            $zh.classList.remove("active");
-            
-        } else {
-            $select.selectedIndex = 0;
-            $zh.style.display = "block";
-            $zh.classList.add("active");
-            $en.style.display = "none";
-            $en.classList.remove("active");
-        }
-        
-        generateCatalog(".catalog-body");
-    }
-
-    
-    function onLanChange(index) {
-        if (index == 0) {
-            lang = "zh"
-        } else {
-            lang = "en"
-        }
-        setLang(lang)
-    }
-
-    
-    _render();
-</script>
 
 
 

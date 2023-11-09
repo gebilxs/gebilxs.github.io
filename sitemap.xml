@@ -2,9 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://gebilxs.github.io/2022/1/3/AcwingEveryDay/</loc>
-    <lastmod>2023-01-03T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://gebilxs.github.io/tags/algorithm/</loc>
     <lastmod>2023-01-03T00:00:00+00:00</lastmod>
   </url><url>
@@ -23,20 +20,9 @@
     <loc>https://gebilxs.github.io/tags/</loc>
     <lastmod>2023-01-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://gebilxs.github.io/categories/%E7%AE%97%E6%B3%95/</loc>
+    <loc>https://gebilxs.github.io/categories/%E7%A7%91%E7%A0%94/</loc>
     <lastmod>2023-01-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://gebilxs.github.io/tags/microservice/</loc>
-    <lastmod>2022-12-28T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://gebilxs.github.io/categories/tech/</loc>
-    <lastmod>2022-12-28T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://gebilxs.github.io/2022/12/28/hello-world/</loc>
-    <lastmod>2022-12-28T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://gebilxs.github.io/about/</loc>
-  </url><url>
-    <loc>https://gebilxs.github.io/archive/</loc>
   </url>
 </urlset>
