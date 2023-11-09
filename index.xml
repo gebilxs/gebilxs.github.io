@@ -6,13 +6,13 @@
     <description>Recent content on gebilxs Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 03 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://gebilxs.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 09 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://gebilxs.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Leetcode每日一题算法记录</title>
-      <link>https://gebilxs.github.io/2022/1/3/LeetcodeEveryDay/</link>
-      <pubDate>Tue, 03 Jan 2023 00:00:00 +0000</pubDate>
+      <title>xxx</title>
+      <link>https://gebilxs.github.io/2022/11/09/re/</link>
+      <pubDate>Thu, 09 Nov 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://gebilxs.github.io/2022/1/3/LeetcodeEveryDay/</guid>
+      <guid>https://gebilxs.github.io/2022/11/09/re/</guid>
       <description></description>
     </item>
     
@@ -23,8 +23,9 @@
       
       <guid>https://gebilxs.github.io/about/</guid>
       <description>About Me Hi, I&amp;rsquo;m Xu Chuokun.
-I am from Tianjin University of Technology, and I am a third-year undergraduate student in the School of Computer Science.
-I am trying to learn the go language recently, and at the same time I am facing the choice of postgraduate entrance examination.
+Hi, I am Xu Yukun.
+I went to SEU for graduate school and studied under Xu Yuwei. My undergraduate degree is from TJUT and I am currently a senior.
+Research directions: Federated Learning, Distillation Learning, Traffic Detection
 Open Source Projects Project Role Website GitHub Weber Creator Not yet online https://github.com/gebilxs/weber </description>
     </item>
     
