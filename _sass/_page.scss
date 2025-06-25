@@ -258,6 +258,45 @@
 }
 
 
+/* ==========================================================================
+   Conference Badge Styles
+   ========================================================================== */
+
+   .sec-conference {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;
+    margin-right: 10px;
+    text-align: center;
+    vertical-align: middle;
+  
+    &.blue {
+      background-color: #a0c1d1; 
+    }
+  
+    &.green {
+      background-color: #b5cbbb;
+    }
+  
+    &.pink {
+      background-color: #d8b4a6;
+    }
+
+    &.purple {
+      background-color: #BFAEC8;
+    }
+
+    &.beige {
+      background-color: #D6C3B3;
+    }
+  }
+  
+
+
+
 /*
    Page taxonomy
    ========================================================================== */

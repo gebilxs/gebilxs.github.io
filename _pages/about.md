@@ -26,7 +26,7 @@ I'm currently a Master student at the S^3DI (Secure, Scalable, and ReSponsible I
 - *2022.02*: &nbsp;🎉🎉 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet.  -->
 
 # 📝 Publications 
-
+<div>
 <p>(* indicates equal contribution.)</p>
   <ul>
   <li class="paper-box-new">
